@@ -299,7 +299,7 @@ Animate.css is MIT licensed. See [animate.style](https://animate.style) for the 
 
 ## Shortcode Integration (optional)
 
-The slider is initialised by CSS class, so it works with any method of outputting HTML—hardcoded markup, custom blocks, or shortcode plugins.
+The slider is initialised by CSS class, so it works with any method of outputting HTML-hardcoded markup, custom blocks, or shortcode plugins.
 The examples in `eric-slider.php` use class names designed to pair with [Display Posts Shortcode](https://displayposts.com/) by Bill Erickson, but that is entirely optional and independent of the slider itself.
 
 Display Posts is GPL-3.0 licensed. See [display-posts-shortcode](https://github.com/billerickson/display-posts-shortcode) for the full library and docs.
