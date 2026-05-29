@@ -55,8 +55,8 @@ See the Eric Slider in action at
 | File | Description |
 |---|---|
 | `eric-slider-animate.php` | Admin interface (control panel) |
-| `eric-slider-v2.35.0.js` | Core slider logic |
-| `eric-slider-v1.23.0.css` | Structural styles (layout, fade, dots, controls) |
+| `eric-slider-vX.XX.X.js` | Core slider logic |
+| `eric-slider-vX.XX.X.css` | Structural styles (layout, fade, dots, controls) |
 
 Visual styles (colours, border-radius, spacing) are intentionally kept out of the main CSS so you can theme the slider in PHP or via your own stylesheet, typically applying CSS variables.
 
@@ -72,8 +72,8 @@ Enqueue both files from your theme or a mu-plugin:
 // NOTE: When used in mu-plugins, add at the top: defined('ABSPATH') || exit;
 
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('eric-slider-css', get_template_directory_uri() . '/assets/eric-slider-v1.23.0.css', [], '1.23.0');
-    wp_enqueue_script('eric-slider-js', get_template_directory_uri() . '/assets/eric-slider-v2.35.0.js', [], '2.35.0', true);
+    wp_enqueue_style('eric-slider-css', get_template_directory_uri() . '/assets/eric-slider-vX.XX.X.css', [], 'X.XX.X');
+    wp_enqueue_script('eric-slider-js', get_template_directory_uri() . '/assets/eric-slider-vX.XX.X.js', [], 'X.XX.X', true);
 }, 20);
 ```
 
@@ -104,11 +104,11 @@ add_filter('litespeed_optimize_html_excluded_selectors', function($excludes) {
 Include both files directly in your HTML:
 
 ```html
-<link rel="stylesheet" href="eric-slider-v1.23.0.css">
-<script src="eric-slider-v2.35.0.js"></script>
+<link rel="stylesheet" href="eric-slider-vX.XX.X.css">
+<script src="eric-slider-vX.XX.X.js"></script>
 ```
 
-Place on server (Do NOT include in HTML):
+Place on server (do NOT include in HTML):
 
 **eric-slider-animate.php**
 ```html
