@@ -58,7 +58,7 @@ See the Eric Slider in action at
 | `eric-slider-v2.35.0.js` | Core slider logic |
 | `eric-slider-v1.23.0.css` | Structural styles (layout, fade, dots, controls) |
 
-Visual styles (colours, border-radius, spacing) are intentionally kept out of the main CSS so you can theme the slider via *.php, your own stylesheet or CSS variables.
+Visual styles (colours, border-radius, spacing) are intentionally kept out of the main CSS so you can theme the slider in PHP or via your own stylesheet, typically applying CSS variables.
 
 ---
 
