@@ -4,7 +4,7 @@
 
 A lightweight, zero-dependency vanilla JavaScript slider / carousel. No jQuery, no bloat — just clean, accessible HTML output with a small footprint.
 
-**Tags:** slider, carousel, javascript, vanilla-js, wordpress, wordpress-plugin, fade, autoplay, responsive, accessible, zero-dependency
+**Tags:** slider, carousel, javascript, vanilla-js, wordpress, fade, autoplay, responsive, accessible, zero-dependency
 
 ---
 
