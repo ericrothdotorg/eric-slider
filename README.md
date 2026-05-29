@@ -108,6 +108,11 @@ Include both files directly in your HTML:
 <script src="eric-slider-v2.35.0.js"></script>
 ```
 
+Place on server (NOT include in HTML):
+
+eric-slider-animate.php  
+→ Open it directly in browser to configure slider → It generates the config file used by the JS slider
+
 ---
 
 ## Basic Usage
