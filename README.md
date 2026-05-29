@@ -111,7 +111,10 @@ Include both files directly in your HTML:
 Place on server (Do NOT include in HTML):
 
 **eric-slider-animate.php**
-https://yourdomain.com/eric-slider-animate.php. Then open it directly in browser to configure slider → It generates the config file used by the JS slider
+```html
+https://yourdomain.com/eric-slider-animate.php
+```
+Then open it directly in browser to configure slider → It generates the config file used by the JS slider
 
 ---
 
