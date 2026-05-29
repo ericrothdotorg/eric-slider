@@ -54,6 +54,7 @@ See the Eric Slider in action at
 
 | File | Description |
 |---|---|
+| `eric-slider-animate.php` | Admin interface (control panel) |
 | `eric-slider-v2.35.0.js` | Core slider logic |
 | `eric-slider-v1.23.0.css` | Structural styles (layout, fade, dots, controls) |
 
