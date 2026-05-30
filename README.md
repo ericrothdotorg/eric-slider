@@ -73,8 +73,8 @@ Enqueue both files from your theme or a mu-plugin:
 // NOTE: When used in mu-plugins, add at the top: defined('ABSPATH') || exit;
 
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('eric-slider-css', get_template_directory_uri() . '/assets/eric-slider-vX.XX.X.css', [], 'X.XX.X');
-    wp_enqueue_script('eric-slider-js', get_template_directory_uri() . '/assets/eric-slider-vX.XX.X.js', [], 'X.XX.X', true);
+    wp_enqueue_style('eric-slider-css', get_template_directory_uri() . '/assets/eric-slider.css', [], '');
+    wp_enqueue_script('eric-slider-js', get_template_directory_uri() . '/assets/eric-slider.js', [], '', true);
 }, 20);
 ```
 
@@ -105,8 +105,8 @@ add_filter('litespeed_optimize_html_excluded_selectors', function($excludes) {
 Include both files directly in your HTML:
 
 ```html
-<link rel="stylesheet" href="eric-slider-vX.XX.X.css">
-<script src="eric-slider-vX.XX.X.js"></script>
+<link rel="stylesheet" href="eric-slider.css">
+<script src="eric-slider.js"></script>
 ```
 
 Place on server (do NOT include in HTML):
