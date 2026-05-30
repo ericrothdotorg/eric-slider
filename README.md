@@ -26,7 +26,7 @@ See the Eric Slider in action at
 - [ericroth.org/about-me/my-quotes](https://ericroth.org/about-me/my-quotes/)
 - [ericroth.org/personal](https://ericroth.org/personal/)
 - [ericroth.org/professional](https://ericroth.org/professional/)
-- [ericroth.org/this-site/](https://ericroth.org/this-site/)
+- [ericroth.org/this-site](https://ericroth.org/this-site/)
 - [ericroth.org/this-site/site-overview](https://ericroth.org/this-site/site-overview/)
 
 ---
