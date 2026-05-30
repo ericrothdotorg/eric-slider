@@ -56,8 +56,8 @@ See the Eric Slider in action at
 | File | Description |
 |---|---|
 | [eric-slider-animate.php](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-animate.php) | Admin interface (control panel) |
-| [eric-slider.js](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider.js) | Core slider logic |
-| [eric-slider.css](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider.css) | Structural styles (layout, fade, dots, controls) |
+| [eric-slider-v1.00.0.js](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v1.00.0.js) | Core slider logic |
+| [eric-slider-v1.00.0.css](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v1.00.0.css) | Structural styles (layout, fade, dots, controls) |
 
 Visual styles (colours, border-radius, spacing) are intentionally kept out of the main CSS so you can theme the slider in PHP or via your own stylesheet, typically applying CSS variables.
 
@@ -73,8 +73,8 @@ Enqueue both files from your theme or a mu-plugin:
 // NOTE: When used in mu-plugins, add at the top: defined('ABSPATH') || exit;
 
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('eric-slider-css', get_template_directory_uri() . '/assets/eric-slider.css', [], '');
-    wp_enqueue_script('eric-slider-js', get_template_directory_uri() . '/assets/eric-slider.js', [], '', true);
+    wp_enqueue_style('eric-slider-css', get_template_directory_uri() . '/assets/eric-slider-vX.XX.X.css', [], '');
+    wp_enqueue_script('eric-slider-js', get_template_directory_uri() . '/assets/eric-slider-vX.XX.X.js', [], '', true);
 }, 20);
 ```
 
@@ -105,8 +105,8 @@ add_filter('litespeed_optimize_html_excluded_selectors', function($excludes) {
 Include both files directly in your HTML:
 
 ```html
-<link rel="stylesheet" href="eric-slider.css">
-<script src="eric-slider.js"></script>
+<link rel="stylesheet" href="eric-slider-vX.XX.X.css">
+<script src="eric-slider-vX.XX.X.js"></script>
 ```
 
 Place on server (do NOT include in HTML):
