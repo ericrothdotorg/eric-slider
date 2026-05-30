@@ -56,7 +56,7 @@ See the Eric Slider in action at
 | File | Description |
 |---|---|
 | `eric-slider-animate.php` | Admin interface (control panel) |
-| `eric-slider-vX.XX.X.js` | Core slider logic |
+| `[eric-slider.js](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v2.36.0.js)eric-slider-vX.XX.X.js` | Core slider logic |
 | `eric-slider-vX.XX.X.css` | Structural styles (layout, fade, dots, controls) |
 
 Visual styles (colours, border-radius, spacing) are intentionally kept out of the main CSS so you can theme the slider in PHP or via your own stylesheet, typically applying CSS variables.
