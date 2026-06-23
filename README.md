@@ -76,7 +76,7 @@ Enqueue both files from your theme or a mu-plugin (the init file declares the li
 add_action('wp_enqueue_scripts', function () {
     wp_enqueue_style('eric-slider-css', get_template_directory_uri() . '/assets/eric-slider-vX.XX.X.css', [], '');
     wp_enqueue_script('eric-slider-js', get_template_directory_uri() . '/assets/eric-slider-vX.XX.X.js', [], '', true);
-    wp_enqueue_script('eric-slider-init', get_template_directory_uri() . '/assets/eric-slider-init.js', ['eric-slider-js'], '', true);
+    wp_enqueue_script('eric-slider-init', get_template_directory_uri() . '/assets/eric-slider-init-vX.XX.X.js', ['eric-slider-js'], '', true);
 }, 20);
 ```
 
