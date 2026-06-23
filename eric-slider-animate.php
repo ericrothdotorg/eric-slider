@@ -13,7 +13,7 @@ add_action('wp_enqueue_scripts', function () {
     // Eric Slider
 	wp_enqueue_style('eric-slider-css', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-v1.00.0.css', [], '1.00.0');
 	wp_enqueue_script('eric-slider-js', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-v1.00.0.js', [], '1.00.0', true);
-	wp_enqueue_script('eric-slider-init', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-init.js', ['eric-slider-js'], '1.00.0', true);
+	wp_enqueue_script('eric-slider-init', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-init-v1.00.0.js', ['eric-slider-js'], '1.00.0', true);
 
 }, 20);
 
