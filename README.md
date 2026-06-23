@@ -56,6 +56,7 @@ See the Eric Slider in action at
 | File | Description |
 |---|---|
 | [eric-slider-animate.php](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-animate.php) | Admin interface (control panel) |
+| [eric-slider-init.js](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-init.js) | Slider init & config (loaded with eric-slider-js as a dependency) |
 | [eric-slider-v1.00.0.js](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v1.00.0.js) | Core slider logic |
 | [eric-slider-v1.00.0.css](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v1.00.0.css) | Structural styles (layout, fade, dots, controls) |
 
