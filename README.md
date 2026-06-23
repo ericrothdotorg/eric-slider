@@ -68,7 +68,7 @@ Visual styles (colours, border-radius, spacing) are intentionally kept out of th
 
 ### WordPress (recommended)
 
-Enqueue both files from your theme or a mu-plugin:
+Enqueue both files from your theme or a mu-plugin (the init file declares the library as a dependency, so it always loads after it):
 
 ```php
 // NOTE: When used in mu-plugins, add at the top: defined('ABSPATH') || exit;
