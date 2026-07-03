@@ -778,6 +778,7 @@
             dragging     = true;
             moved        = false;
             css(self._track, { transition: 'none' });
+            if (!e.touches) { list.style.userSelect = 'none'; document.body.style.userSelect = 'none'; }
             if (!e.touches) list.style.cursor = 'grabbing';
         }
 
@@ -802,8 +803,22 @@
         function onEnd(e) {
             if (!dragging) return;
             dragging = false;
+            if (!e.touches) { list.style.userSelect = ''; document.body.style.userSelect = ''; }
             if (!e.touches) list.style.cursor = 'grab';
             if (!moved) return;
+
+            // A real drag just ended. Browsers fire a click after mouseup, which
+            // would trigger a card anchor or the whole-card click handler. Swallow
+            // that one click (capture phase) so a drag never navigates. Removed on
+            // the next tick so normal clicks are unaffected.
+            var swallowClick = function (ev) {
+                ev.preventDefault();
+                ev.stopPropagation();
+                window.removeEventListener('click', swallowClick, true);
+            };
+            window.addEventListener('click', swallowClick, true);
+            setTimeout(function () { window.removeEventListener('click', swallowClick, true); }, 0);
+
             var endX  = e.changedTouches ? e.changedTouches[0].clientX : (e.clientX !== undefined ? e.clientX : startX);
             var endY  = e.changedTouches ? e.changedTouches[0].clientY : (e.clientY !== undefined ? e.clientY : startY);
             var delta = opts.vertical ? (endY - startY) : (endX - startX);
@@ -824,6 +839,10 @@
         list.addEventListener('mousedown', onStart);
         window.addEventListener('mousemove', onMove);
         window.addEventListener('mouseup',   onEnd);
+
+        function onDragStart(e) { e.preventDefault(); }
+        list.addEventListener('dragstart', onDragStart);
+        this._touchDragStart = onDragStart;
 
         // Store refs for cleanup in destroy()
         this._touchList    = list;
@@ -874,6 +893,7 @@
             this._touchList.removeEventListener('mousedown',  this._touchStart);
             window.removeEventListener('mousemove', this._touchMove);
             window.removeEventListener('mouseup',   this._touchEnd);
+            if (this._touchDragStart) this._touchList.removeEventListener('dragstart', this._touchDragStart);
         }
 
         var self = this;
