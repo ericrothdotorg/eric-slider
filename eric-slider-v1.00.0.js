@@ -793,6 +793,7 @@
             }
             e.preventDefault();
             moved = true;
+            if (opts.fade) { return; }
             if (opts.vertical) {
                 css(self._track, { transform: 'translate3d(0,' + (startOffset + dy) + 'px,0)' });
             } else {
@@ -825,7 +826,7 @@
             var size  = opts.vertical ? (self._slideH * opts.slidesToShow) : self._listW;
             if (Math.abs(delta) > size / 5) {
                 delta < 0 ? self.next() : self.prev();
-            } else {
+            } else if (!opts.fade) {
                 // Snap back to current position
                 opts.vertical ? self._positionVertical(true) : self._positionTrack(true);
             }
