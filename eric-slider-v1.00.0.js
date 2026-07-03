@@ -762,7 +762,7 @@
         var self = this;
         var list = this._list;
         var opts = this.options;
-        var startX, startY, startOffset, dragging = false;
+        var startX, startY, startOffset, dragging = false, moved = false;
 
         function getX(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
         function getY(e) { return e.touches ? e.touches[0].clientY : e.clientY; }
@@ -776,6 +776,7 @@
                 ? -((self.current + opts.slidesToShow) * self._slideH)
                 : self._getOffset(self.current);
             dragging     = true;
+            moved        = false;
             css(self._track, { transition: 'none' });
             if (!e.touches) list.style.cursor = 'grabbing';
         }
@@ -790,6 +791,7 @@
                 return;
             }
             e.preventDefault();
+            moved = true;
             if (opts.vertical) {
                 css(self._track, { transform: 'translate3d(0,' + (startOffset + dy) + 'px,0)' });
             } else {
@@ -801,6 +803,7 @@
             if (!dragging) return;
             dragging = false;
             if (!e.touches) list.style.cursor = 'grab';
+            if (!moved) return;
             var endX  = e.changedTouches ? e.changedTouches[0].clientX : (e.clientX !== undefined ? e.clientX : startX);
             var endY  = e.changedTouches ? e.changedTouches[0].clientY : (e.clientY !== undefined ? e.clientY : startY);
             var delta = opts.vertical ? (endY - startY) : (endX - startX);
