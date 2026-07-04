@@ -144,7 +144,7 @@
         if (opts.fade || opts.adaptiveHeight) this._bindImageLoad();
 
         this._bindEvents();
-        if (opts.autoplay) this._startAutoplay();
+        if (opts.autoplay) { this._startAutoplay(); this._bindVisibility(); }
 
         this._updateAria();
         if (opts.dots) this._updateDots();
@@ -571,10 +571,8 @@
         // Primary: clear on transitionend so rapid navigation is unblocked as soon
         // as the CSS transition actually finishes (not just after an arbitrary delay).
         if (animated && !this.options.fade) {
-            var cleared = false;
             var onTransEnd = function (e) {
                 if (e.propertyName !== 'transform') return;
-                cleared = true;
                 self._track.removeEventListener('transitionend', onTransEnd);
                 self._animating = false;
                 self._updateAria();
@@ -621,6 +619,29 @@
         if (this._timer) { clearInterval(this._timer); this._timer = null; }
     };
 
+    // Pause the interval while the tab is hidden; resume on return. Uses the
+    // existing _paused flag so it composes with hover/focus pause without
+    // fighting them. Stored as a bound ref so destroy() can remove it.
+    EricSlider.prototype._bindVisibility = function () {
+        var self = this;
+        this._onVisibility = function () {
+            if (document.hidden) {
+                self._pausedByHidden = true;
+                self._paused = true;
+            } else if (self._pausedByHidden) {
+                self._pausedByHidden = false;
+                if (!self._manualPause) self._paused = false;
+            }
+        };
+        document.addEventListener('visibilitychange', this._onVisibility);
+    };
+
+    // Called on genuine user navigation (arrows, dots) to give the chosen slide
+    // a full interval before autoplay advances again. No-op when autoplay is off.
+    EricSlider.prototype._restartAutoplay = function () {
+        if (this.options.autoplay) this._startAutoplay();
+    };
+
     /* =========================================================
        DOTS
     ========================================================= */
@@ -665,8 +686,8 @@
 
         // Controls bar
         if (opts.controls && this._controlsEl) {
-            this._ctrlPrev.addEventListener('click', function () { self.prev(); });
-            this._ctrlNext.addEventListener('click', function () { self.next(); });
+            this._ctrlPrev.addEventListener('click', function () { self.prev(); self._restartAutoplay(); });
+            this._ctrlNext.addEventListener('click', function () { self.next(); self._restartAutoplay(); });
             this._ctrlPause.addEventListener('click', function () {
                 if (self._manualPause) {
                     self._manualPause = false;
@@ -685,7 +706,7 @@
         // Dots
         if (opts.dots && this._dotsEl) {
             Array.prototype.forEach.call(this._dotsEl.querySelectorAll('button'), function (btn, i) {
-                btn.addEventListener('click', function () { self.goTo(i); });
+                btn.addEventListener('click', function () { self.goTo(i); self._restartAutoplay(); });
             });
         }
 
@@ -764,8 +785,16 @@
         var opts = this.options;
         var startX, startY, startOffset, dragging = false, moved = false;
 
-        function getX(e) { return e.touches ? e.touches[0].clientX : e.clientX; }
-        function getY(e) { return e.touches ? e.touches[0].clientY : e.clientY; }
+        function getX(e) {
+            if (e.touches && e.touches[0]) return e.touches[0].clientX;
+            if (e.changedTouches && e.changedTouches[0]) return e.changedTouches[0].clientX;
+            return e.clientX;
+        }
+        function getY(e) {
+            if (e.touches && e.touches[0]) return e.touches[0].clientY;
+            if (e.changedTouches && e.changedTouches[0]) return e.changedTouches[0].clientY;
+            return e.clientY;
+        }
 
         function onStart(e) {
             if (self._animating) return;
@@ -884,6 +913,7 @@
     
     EricSlider.prototype.destroy = function () {
         this._clearAutoplay();
+        if (this._onVisibility) document.removeEventListener('visibilitychange', this._onVisibility);
         if (this._onResize) window.removeEventListener('resize', this._onResize);
         if (this._resizeObserver) { this._resizeObserver.disconnect(); this._resizeObserver = null; }
 
