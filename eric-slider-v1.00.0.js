@@ -791,6 +791,7 @@
                 dragging = false;
                 return;
             }
+            if (!moved && Math.abs(opts.vertical ? dy : dx) < 5) return;
             e.preventDefault();
             moved = true;
             if (opts.fade) { return; }
