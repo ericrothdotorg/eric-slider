@@ -1,4 +1,12 @@
 <?php
+/**
+ * Eric Slider & Animate
+ *
+ * * Eric Slider – Custom styles, loads self-hosted CSS and JS (init in eric-slider-init.js)
+ * Animate – Dan Eden: Animate (in viewport) – loads self-hosted CSS (Original: https://animate.style/)
+ * Login Hostinger and go to my-assets (eric-slider) in Dashboard → File Manager
+ *
+ */
 // NOTE: When in mu-plugins, add: defined('ABSPATH') || exit;
 
 // ======================================
@@ -31,6 +39,7 @@ add_action('wp_enqueue_scripts', function () {
 
     if ( $needs_animate ) {
         wp_enqueue_style('animate-css', get_stylesheet_directory_uri() . '/my-assets/animate.min.css', [], '4.1.1');
+        wp_enqueue_script('animate-js', get_stylesheet_directory_uri() . '/my-assets/animate.js', [], filemtime(get_stylesheet_directory() . '/my-assets/animate.js'), true);
     }
 
     // Eric Slider — stays global. The JS self-exits when no .slideshow-*
