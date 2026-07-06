@@ -27,7 +27,8 @@ add_action('wp_enqueue_scripts', function () {
         $post = get_post();
         if ( $post && ! empty( $post->post_content )
           && ( strpos( $post->post_content, 'slideshow-' ) !== false
-            || strpos( $post->post_content, 'daneden-'   ) !== false ) ) {
+            || strpos( $post->post_content, 'daneden-'   ) !== false
+            || strpos( $post->post_content, 'wp-block-pullquote' ) !== false ) ) {
             $needs_animate = true;
         }
     }
