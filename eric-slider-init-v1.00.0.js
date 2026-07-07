@@ -6,6 +6,7 @@
  * the old inline setTimeout retry race (slider sometimes loading late / only on
  * refresh). Init logic and config live here; the library file stays untouched.
  */
+
 (function() {
 
     // Eric Slider Initialization
