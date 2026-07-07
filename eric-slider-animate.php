@@ -12,20 +12,7 @@ add_action('wp_enqueue_scripts', function () {
     // further down are small (~5KB) and load everywhere. Start by assuming
     // animate isn't needed.
 	
-    $needs_animate = false;
-
-    // On single posts/pages, peek at the content. If it mentions a slider
-    // a quote or a pullquote, then we know we'll need animate.
-	
-    if ( is_singular() ) {
-        $post = get_post();
-        if ( $post && ! empty( $post->post_content )
-          && ( strpos( $post->post_content, 'slideshow-' ) !== false
-            || strpos( $post->post_content, 'daneden-'   ) !== false
-            || strpos( $post->post_content, 'wp-block-pullquote' ) !== false ) ) {
-            $needs_animate = true;
-        }
-    }
+    $needs_animate = true;
 
     // Sometimes a slider gets rendered from a template file instead of the
     // post content (so the check above misses it). In that case, force
