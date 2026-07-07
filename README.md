@@ -59,7 +59,7 @@ See the Eric Slider in action at
 | [eric-slider-init-v1.00.0.js](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-init-v1.00.0.js) | Slider init & config (loaded with eric-slider-js as a dependency) |
 | [eric-slider-v1.00.0.js](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v1.00.0.js) | Core slider logic |
 | [eric-slider-v1.00.0.css](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v1.00.0.css) | Structural styles (layout, fade, dots, controls) |
-| [eric-slider-v1.00.0.css](https://github.com/ericrothdotorg/eric-slider/blob/main/animate.js) | Optional if you want to integrate animation |
+| [animate.js](https://github.com/ericrothdotorg/eric-slider/blob/main/animate.js) | Optional if you want to integrate animation |
 
 Visual styles (colours, border-radius, spacing) are intentionally kept out of the main CSS so you can theme the slider in PHP or via your own stylesheet, typically applying CSS variables.
 
