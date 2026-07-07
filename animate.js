@@ -5,6 +5,7 @@
  * scrolls into view. No dependency on Eric Slider. Enqueued by the
  * "Eric Slider & Animate" snippet, gated on the same $needs_animate check.
  */
+
 (function() {
     function initAnimateCSS() {
         document.querySelectorAll('.wp-block-pullquote blockquote').forEach(function (bq) {
