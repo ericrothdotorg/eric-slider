@@ -1,28 +1,22 @@
 <?php
-/**
- * Eric Slider & Animate
- *
- * * Eric Slider – Custom styles, loads self-hosted CSS and JS (init in eric-slider-init.js)
- * Animate – Dan Eden: Animate (in viewport) – loads self-hosted CSS (Original: https://animate.style/)
- * Login Hostinger and go to my-assets (eric-slider) in Dashboard → File Manager
- *
- */
 // NOTE: When in mu-plugins, add: defined('ABSPATH') || exit;
 
 // ======================================
-// ERIC SLIDER & ANIMATE: BASICS
+// ERIC SLIDER & ANIMATE: SETUP
 // ======================================
 
 add_action('wp_enqueue_scripts', function () {
 
-    // --- Animate.css: load only when the page actually uses it ---
-    // Every template delivers slider/animation markup through wp:post-content
-    // (verified: no slider markup lives in any template part), so scanning the
-    // current singular post's content catches every case. Markers:
-    //   slideshow- → any Eric Slider variant
-    //   daneden-   → a scroll-triggered animate.css element
+	// animate.min.css and animate.js are rather big files (~72KB together), so
+    // we only load them when a page actually uses them. The slider files
+    // further down are small (~5KB) and load everywhere. Start by assuming
+    // animate isn't needed.
+	
     $needs_animate = false;
 
+    // On single posts/pages, peek at the content. If it mentions a slider
+    // a quote or a pullquote, then we know we'll need animate.
+	
     if ( is_singular() ) {
         $post = get_post();
         if ( $post && ! empty( $post->post_content )
@@ -33,34 +27,44 @@ add_action('wp_enqueue_scripts', function () {
         }
     }
 
-    // Escape hatch: any template part/snippet rendering a slider outside
-    // post content can force this on with:
-    //   add_filter('er_needs_animate_css', '__return_true');
+    // Sometimes a slider gets rendered from a template file instead of the
+    // post content (so the check above misses it). In that case, force
+    // animate to load by dropping this line in the template:
+    // add_filter('er_needs_animate_css', '__return_true');
+	
     $needs_animate = apply_filters( 'er_needs_animate_css', $needs_animate );
 
+    // Load animate's CSS and JS only when we decided it's needed (optional for Eric Slider).
+	
     if ( $needs_animate ) {
         wp_enqueue_style('animate-css', get_stylesheet_directory_uri() . '/my-assets/animate.min.css', [], '4.1.1');
         wp_enqueue_script('animate-js', get_stylesheet_directory_uri() . '/my-assets/animate.js', [], filemtime(get_stylesheet_directory() . '/my-assets/animate.js'), true);
     }
 
-    // Eric Slider — stays global. The JS self-exits when no .slideshow-*
-    // exists, and the slider CSS is only ~5KB. Only the 72KB animate lib
-    // was worth gating.
-	wp_enqueue_style('eric-slider-css', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-v1.00.0.css', [], '1.00.0');
-	wp_enqueue_script('eric-slider-js', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-v1.00.0.js', [], '1.00.0', true);
-	wp_enqueue_script('eric-slider-init', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-init-v1.00.0.js', ['eric-slider-js'], '1.00.0', true);
+	// The eric-slider files load on every page. That's fine: the Eric Slider CSS is
+    // small (~5KB) and the Eric Slider JS quietly does nothing when there's no slider on the page.
+	
+    wp_enqueue_style('eric-slider-css', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-v1.00.0.css', [], '1.00.0');
+    wp_enqueue_script('eric-slider-js', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-v1.00.0.js', [], '1.00.0', true);
+    wp_enqueue_script('eric-slider-init', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-init-v1.00.0.js', ['eric-slider-js'], '1.00.0', true);
 
 }, 20);
 
-// Ignore Slider Images in LiteSpeed Cache – Let Eric Slider handle them
+// Tell LiteSpeed Cache to leave slider images alone. The slider needs to
+// manage its own images, so we don't want the cache plugin touching them.
+
 add_filter('litespeed_optimize_html_excluded_selectors', function($excludes) {
     $excludes[] = '.eric-slider img';
     return $excludes;
 });
 
 // ======================================
-// ERIC SLIDER: Criticals in Head
+// ERIC SLIDER: HIDE SLIDERS UNTIL READY
 // ======================================
+
+// This goes in the <head> so it applies before anything shows on screen.
+// Sliders start hidden and only become visible once the slider JS has set
+// them up. This stops the ugly flash of unstyled slides on page load.
 
 add_action('wp_head', function () {
     ?>
