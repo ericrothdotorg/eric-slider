@@ -294,7 +294,7 @@ MIT — free to use, modify, and distribute.
 
 The included PHP / JS example also integrates [Animate.css](https://animate.style) by Dan Eden for scroll-triggered entrance animations. It is entirely optional and independent of the slider itself.
 
-To use it, enqueue `animate.min.css` alongside Eric Slider and add one of the trigger classes (e.g. `daneden-fadeInUp`) to any element. The script uses `IntersectionObserver` to fire the animation when the element scrolls into view.
+To use it, enqueue `animate.min.css` and `animate.js` alongside Eric Slider and add one of the trigger classes (e.g. `daneden-fadeInUp`) to any element. The script uses `IntersectionObserver` to fire the animation when the element scrolls into view.
 
 Animate.css is MIT licensed. See [animate.style](https://animate.style) for the full library and docs.
 
