@@ -98,8 +98,6 @@
         var r = base.responsive;
         if (!r || !r.length) return base;
         var w = window.innerWidth;
-        // Sort ascending, then find the smallest breakpoint that is still larger
-        // than the current viewport width — that is the active breakpoint.
         var sorted = r.slice().sort(function (a, b) { return a.breakpoint - b.breakpoint; });
         var match  = null;
         for (var i = 0; i < sorted.length; i++) {
@@ -138,8 +136,6 @@
         this._setDimensions();
         this._setInitialPosition();
 
-        // FIX 4: for fade+adaptiveHeight, images may not be loaded yet.
-        // Set initial height, then re-measure once each image loads.
         if (opts.adaptiveHeight) this._adaptHeight(false);
         if (opts.fade || opts.adaptiveHeight) this._bindImageLoad();
 
@@ -151,8 +147,6 @@
 
         el.classList.add('eric-slider-initialized');
 
-        // Safety net: remeasure after visibility is restored (handles cached images
-        // that never fire load, and ensures measurement is post-paint).
         if (opts.adaptiveHeight) {
             requestAnimationFrame(function () {
                 if (opts.fade) self._applyFade(self.current, false);
@@ -247,9 +241,6 @@
             this._controlsEl.appendChild(this._ctrlNext);
 
             if (opts.centerMode && el.parentNode) {
-                // Wrap el in a dedicated div so controls can live outside el.
-                // overflow: hidden on .eric-slider-center clips position: absolute; top: -40px
-                // inside el. The wrapper is purpose-built and never shared with other sliders.
                 this._centerWrap = document.createElement('div');
                 this._centerWrap.className = 'eric-slider-center-wrap';
                 el.parentNode.insertBefore(this._centerWrap, el);
@@ -274,10 +265,7 @@
         var old = this._track.querySelectorAll('.eric-slider-cloned');
         Array.prototype.forEach.call(old, function (c) { c.parentNode.removeChild(c); });
 
-        // Prepend clones of last n slides IN REVERSE so track order is correct.
-        // i=n-1 first → clone of (total-1), inserted at front
-        // i=0   last  → clone of (total-n), inserted at front
-        // Result: front of track = [...clone(total-n), ..., clone(total-1)]
+        // Prepend clones of last n slides IN REVERSE so track order is correct
         for (var i = n - 1; i >= 0; i--) {
             var srcIdx = (total - n + i + total) % total;
             var clone  = this._slideEls[srcIdx].cloneNode(true);
@@ -304,8 +292,6 @@
     EricSlider.prototype._setDimensions = function () {
         var opts = this.options;
 
-        // Use root element width — reliable regardless of negative margins
-        // that PHP CSS applies to .eric-slider-list for gutters.
         var lw = this.el.offsetWidth;
         this._listW = lw;
         this._listH = this._list.offsetHeight;
@@ -336,8 +322,6 @@
                 padding:  '0'
             });
         } else {
-            // slideW = full slot width per slide including its CSS margins.
-            // Slide element's actual width = slideW minus those margins.
             slideW = Math.floor(lw / opts.slidesToShow);
             css(this._list, { width: lw + 'px' });
         }
@@ -446,7 +430,7 @@
         var s = this._slideEls[this.current];
         if (!s) return;
         // In fade mode, _applyFade has already set the active slide to position:relative,
-        // so offsetHeight is accurate. scrollHeight is unreliable if there's padding/overflow.
+        // so offsetHeight is accurate. scrollHeight is unreliable if there's padding / overflow.
         var h = s.offsetHeight;
         if (!h) return; // not measured yet — _bindImageLoad will retry
         var dur = (animate && !this._reducedMotion) ? this.options.speed + 'ms' : '0ms';
@@ -480,9 +464,6 @@
             }
         });
 
-        // IntersectionObserver — for lazy images whose load events are deferred
-        // by the browser or LiteSpeed until the element enters the viewport.
-        // Remeasures once on intersection, then disconnects.
         if ('IntersectionObserver' in window && self.options.adaptiveHeight) {
             var io = new IntersectionObserver(function (entries) {
                 entries.forEach(function (entry) {
@@ -568,8 +549,6 @@
         var self = this;
         var dur  = animated ? this.options.speed : 0;
 
-        // Primary: clear on transitionend so rapid navigation is unblocked as soon
-        // as the CSS transition actually finishes (not just after an arbitrary delay).
         if (animated && !this.options.fade) {
             var onTransEnd = function (e) {
                 if (e.propertyName !== 'transform') return;
@@ -581,8 +560,6 @@
             this._track.addEventListener('transitionend', onTransEnd);
         }
 
-        // Fallback timeout — ensures _animating is always cleared even if
-        // transitionend misfires (tab hidden, animation skipped, fade mode).
         setTimeout(function () {
             if (self._animating) {
                 self._animating = false;
@@ -619,9 +596,6 @@
         if (this._timer) { clearInterval(this._timer); this._timer = null; }
     };
 
-    // Pause the interval while the tab is hidden; resume on return. Uses the
-    // existing _paused flag so it composes with hover/focus pause without
-    // fighting them. Stored as a bound ref so destroy() can remove it.
     EricSlider.prototype._bindVisibility = function () {
         var self = this;
         this._onVisibility = function () {
@@ -636,8 +610,6 @@
         document.addEventListener('visibilitychange', this._onVisibility);
     };
 
-    // Called on genuine user navigation (arrows, dots) to give the chosen slide
-    // a full interval before autoplay advances again. No-op when autoplay is off.
     EricSlider.prototype._restartAutoplay = function () {
         if (this.options.autoplay) this._startAutoplay();
     };
@@ -660,12 +632,22 @@
     
     EricSlider.prototype._updateAria = function () {
         if (!this.options.accessibility) return;
-        var opts = this.options;
-        var self = this;
+        var opts  = this.options;
+        var self  = this;
+        var total = this._count;
         this._slideEls.forEach(function (slide, i) {
-            var visible = opts.centerMode
-                ? i === self.current
-                : (i >= self.current && i < self.current + opts.slidesToShow);
+            var offset = i - self.current;
+            if (opts.infinite && total > 0) {
+                offset = ((offset % total) + total) % total;
+            }
+            var visible;
+            if (opts.centerMode) {
+                // Centre slide plus the two neighbours that peek in via centerPadding.
+                visible = (offset === 0) || (offset === 1) ||
+                          (opts.infinite ? offset === total - 1 : offset === -1);
+            } else {
+                visible = offset >= 0 && offset < opts.slidesToShow;
+            }
             slide.setAttribute('aria-hidden', visible ? 'false' : 'true');
             slide.style.pointerEvents = visible ? '' : 'none';
             var focusable = slide.querySelectorAll('a, input, button, select, textarea, [tabindex]');
@@ -747,7 +729,6 @@
         window.addEventListener('resize', this._onResize);
 
         // ResizeObserver — catches container reflows (tabs, accordions, WP blocks, etc.)
-        // that change the slider's width without triggering window resize.
         if (typeof ResizeObserver !== 'undefined') {
             var lastW = self.el.offsetWidth;
             self._resizeObserver = new ResizeObserver(function () {
@@ -832,16 +813,11 @@
         }
 
         function onEnd(e) {
-            if (!dragging) return;
-            dragging = false;
             if (!e.touches) { list.style.userSelect = ''; document.body.style.userSelect = ''; }
             if (!e.touches) list.style.cursor = 'grab';
+            if (!dragging) return;
+            dragging = false;
             if (!moved) return;
-
-            // A real drag just ended. Browsers fire a click after mouseup, which
-            // would trigger a card anchor or the whole-card click handler. Swallow
-            // that one click (capture phase) so a drag never navigates. Removed on
-            // the next tick so normal clicks are unaffected.
             var swallowClick = function (ev) {
                 ev.preventDefault();
                 ev.stopPropagation();
@@ -849,7 +825,6 @@
             };
             window.addEventListener('click', swallowClick, true);
             setTimeout(function () { window.removeEventListener('click', swallowClick, true); }, 0);
-
             var endX  = e.changedTouches ? e.changedTouches[0].clientX : (e.clientX !== undefined ? e.clientX : startX);
             var endY  = e.changedTouches ? e.changedTouches[0].clientY : (e.clientY !== undefined ? e.clientY : startY);
             var delta = opts.vertical ? (endY - startY) : (endX - startX);
