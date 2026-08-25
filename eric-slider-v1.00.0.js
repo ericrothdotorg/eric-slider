@@ -295,10 +295,10 @@
         var lw = this.el.offsetWidth;
         this._listW = lw;
         this._listH = this._list.offsetHeight;
-
+        // Every mode needs an explicit list width and no flex shrinking, or the list collapses inside a flex / grid wrapper.
+        css(this._list, { width: lw + 'px', flexShrink: '0' });
         if (opts.fade) {
             this._slideW = lw;
-            css(this._list, { width: lw + 'px', flexShrink: '0' });
             return;
         }
 
