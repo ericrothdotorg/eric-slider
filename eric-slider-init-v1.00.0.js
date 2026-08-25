@@ -59,6 +59,26 @@
             });
         });
 
+        // Multiple Items
+        document.querySelectorAll('.slideshow-multiple-items').forEach(function(el) {
+            new EricSlider(el, {
+                label: 'Posts Slideshow',
+                controls: true,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                fade: false,
+                adaptiveHeight: false,
+                dots: true,
+                infinite: true,
+                slidesToShow: 3,
+                slidesToScroll: 1,
+                responsive: [
+                    { breakpoint: 992, settings: { slidesToShow: 2 } },
+                    { breakpoint: 768, settings: { slidesToShow: 1 } }
+                ]
+            });
+        });
+
         // Multiple Items 3
         document.querySelectorAll('.slideshow-multiple-items-3').forEach(function(el) {
             new EricSlider(el, {
