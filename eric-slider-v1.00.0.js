@@ -298,6 +298,7 @@
 
         if (opts.fade) {
             this._slideW = lw;
+            css(this._list, { width: lw + 'px', flexShrink: '0' });
             return;
         }
 
