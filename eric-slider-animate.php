@@ -54,6 +54,7 @@ add_action('wp_head', function () {
     <style>
         .slideshow-single-item,
         .slideshow-single-item-no-dots,
+		.slideshow-single-item-chromeless,
         .slideshow-multiple-items,
         .slideshow-multiple-items-3,
         .slideshow-multiple-items-4,
