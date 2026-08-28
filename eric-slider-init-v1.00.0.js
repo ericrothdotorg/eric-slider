@@ -6,13 +6,30 @@
  * the old inline setTimeout retry race (slider sometimes loading late / only on
  * refresh). Init logic and config live here; the library file stays untouched.
  */
-
+ 
 (function() {
 
     // Eric Slider Initialization
     function initEricSlider() {
-        // Single Item with Fade
+        
+        // Single Item (slide, with controls, with dots)
         document.querySelectorAll('.slideshow-single-item').forEach(function(el) {
+                new EricSlider(el, {
+                label: 'Images Slideshow',
+                controls: true,
+                autoplay: true,
+                autoplaySpeed: 2000,
+                fade: false,
+                adaptiveHeight: true,
+                dots: true,
+                infinite: true,
+                slidesToShow: 1,
+                slidesToScroll: 1
+            });
+        });
+        
+        // Single Item with Fade (fade, no controls, with dots)
+        document.querySelectorAll('.slideshow-single-item-fade').forEach(function(el) {
             new EricSlider(el, {
                 label: 'Images Slideshow',
                 controls: false,
@@ -27,7 +44,7 @@
             });
         });
 
-        // Single Item, No Dots (same as single-item, dots off)
+        // Single Item, No Dots (fade, no controls, no dots)
         document.querySelectorAll('.slideshow-single-item-no-dots').forEach(function(el) {
             new EricSlider(el, {
                 label: 'Images Slideshow',
@@ -43,7 +60,7 @@
             });
         });
 
-        // Single Item Chromeless (no Controls, no Dots)
+        // Single Item Chromeless (slide, no controls, no dots)
         document.querySelectorAll('.slideshow-single-item-chromeless').forEach(function(el) {
             new EricSlider(el, {
                 label: 'Images Slideshow',
@@ -59,7 +76,7 @@
             });
         });
 
-        // Multiple Items
+        // Multiple Items (slide, with controls, with dots)
         document.querySelectorAll('.slideshow-multiple-items').forEach(function(el) {
             new EricSlider(el, {
                 label: 'Posts Slideshow',
@@ -78,7 +95,7 @@
             });
         });
 
-        // Multiple Items 3
+        // Multiple Items 3 (slide, with controls, with dots)
         document.querySelectorAll('.slideshow-multiple-items-3').forEach(function(el) {
             new EricSlider(el, {
                 label: 'Posts Slideshow',
@@ -98,7 +115,7 @@
             });
         });
 
-        // Multiple Items 4
+        // Multiple Items 4 (slide, with controls, with dots)
         document.querySelectorAll('.slideshow-multiple-items-4').forEach(function(el) {
             new EricSlider(el, {
                 label: 'Posts Slideshow',
@@ -119,7 +136,7 @@
             });
         });
 
-        // Multiple Items Vertical
+        // Multiple Items Vertical (slide, no controls, no dots)
         document.querySelectorAll('.slideshow-multiple-items-vertical').forEach(function(el) {
             new EricSlider(el, {
                 label: 'Posts Slideshow',
@@ -135,7 +152,7 @@
             });
         });
 
-        // Center Mode
+        // Center Mode (slide, with controls, with dots)
         document.querySelectorAll('.slideshow-multiple-items-center-mode').forEach(function(el) {
             new EricSlider(el, {
                 label: 'Services Slideshow',
@@ -157,7 +174,7 @@
             });
         });
 
-        // My Quotes
+        // My Quotes (fade, no controls, with dots)
         document.querySelectorAll('.slideshow-quotes').forEach(function(el) {
             new EricSlider(el, {
                 label: 'Quotes Slideshow',
