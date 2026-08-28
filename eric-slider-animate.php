@@ -28,9 +28,9 @@ add_action('wp_enqueue_scripts', function () {
     // CSS is small (~5KB) and the Eric Slider JS quietly does nothing when
     // there's no slider on the page.
 	
-    wp_enqueue_style('eric-slider-css', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-v1.00.0.css', [], '1.00.0');
-    wp_enqueue_script('eric-slider-js', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-v1.00.0.js', [], '1.00.0', true);
-    wp_enqueue_script('eric-slider-init', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-init-v1.00.0.js', ['eric-slider-js'], '1.00.0', true);
+    wp_enqueue_style('eric-slider-css', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-v1.00.0.css', [], '1.00.1');
+    wp_enqueue_script('eric-slider-js', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-v1.00.0.js', [], '1.00.1', true);
+    wp_enqueue_script('eric-slider-init', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-init-v1.00.0.js', ['eric-slider-js'], '1.00.1', true);
 }, 20);
 
 // Tell LiteSpeed Cache to leave slider images alone. The slider needs to
@@ -53,8 +53,9 @@ add_action('wp_head', function () {
     ?>
     <style>
         .slideshow-single-item,
+		.slideshow-single-item-fade,
         .slideshow-single-item-no-dots,
-		.slideshow-single-item-chromeless,
+        .slideshow-single-item-chromeless,
         .slideshow-multiple-items,
         .slideshow-multiple-items-3,
         .slideshow-multiple-items-4,
