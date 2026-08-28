@@ -233,10 +233,14 @@
 /* ── Slideshow block-wrapper skin ── */
 
 /* Single item */
-.slideshow-single-item { transition: height 0.4s ease; }
-.slideshow-single-item img { border-radius: 25px; }
-.slideshow-single-item .listing-item img { border-radius: 25px 25px 0 0; }
-.slideshow-single-item .wp-block-columns { align-items: center; }
+.slideshow-single-item,
+.slideshow-single-item-fade { transition: height 0.4s ease; }
+.slideshow-single-item img,
+.slideshow-single-item-fade img { border-radius: 25px; }
+.slideshow-single-item .listing-item img,
+.slideshow-single-item-fade .listing-item img { border-radius: 25px 25px 0 0; }
+.slideshow-single-item .wp-block-columns,
+.slideshow-single-item-fade .wp-block-columns { align-items: center; }
 
 /* Multiple items — horizontal gutters */
 .slideshow-multiple-items .eric-slider-list,
