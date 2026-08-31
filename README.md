@@ -10,7 +10,7 @@ A lightweight, zero-dependency vanilla JavaScript slider / carousel. No jQuery, 
 
 **What makes it genuinely stand out**
 
-The WordPress-native approach is quite uncommon. Most sliders are npm / bundler-first and treat WordPress as an afterthought. This one is built the other way around - the PHP enqueue pattern, LiteSpeed Cache filter, FOUC guard in wp_head, and the way visual styles are intentionally kept out of the CSS so theme developers can override freely. That's a coherent, thought-through philosophy that most "just another slider" libraries don't have. Furthermore, it's genuinely zero-dependency in the truest sense - no build step, no npm, no bundler. You drop two files in and write a new EricSlider(). That's increasingly rare as most modern libraries assume a toolchain.
+The WordPress-native approach is quite uncommon. Most sliders are npm / bundler-first and treat WordPress as an afterthought. This one is built the other way around - the PHP enqueue pattern, LiteSpeed Cache filter, FOUC guard in wp_head, and the way colours and focus rings run through CSS variables so theme developers can override freely. That's a coherent, thought-through philosophy that most "just another slider" libraries don't have. Furthermore, it's genuinely zero-dependency in the truest sense - no build step, no npm, no bundler. You drop two files in and write a new EricSlider(). That's increasingly rare as most modern libraries assume a toolchain.
 
 **Who would actually reach for it**
 
@@ -55,13 +55,13 @@ See the Eric Slider in action at
 
 | File | Description |
 |---|---|
-| [eric-slider-animate.php](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-animate.php) | Admin interface (control panel) |
+| [eric-slider-animate.php](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-animate.php) | WordPress integration — enqueues, FOUC guard, LiteSpeed Cache filter |
 | [eric-slider-init-v1.00.0.js](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-init-v1.00.0.js) | Slider init & config (loaded with eric-slider-js as a dependency) |
 | [eric-slider-v1.00.0.js](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v1.00.0.js) | Core slider logic |
-| [eric-slider-v1.00.0.css](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v1.00.0.css) | Structural styles (layout, fade, dots, controls) |
+| [eric-slider-v1.00.0.css](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v1.00.0.css) | Structural styles, plus the example skin used on ericroth.org |
 | [animate.js](https://github.com/ericrothdotorg/website-lab/blob/main/ollie-child/my-assets/animate.js) | Optional if you want to integrate animation (see below) |
 
-Visual styles (colours, border-radius, spacing) are intentionally kept out of the main CSS so you can theme the slider in PHP or via your own stylesheet, typically applying CSS variables.
+Colours and focus rings run through CSS variables, so you can theme the slider from your own stylesheet without editing the file. The lower part of the CSS is the example skin from ericroth.org (`.slideshow-*` and `.layer-*` rules) — delete it if you don't want it.
 
 ---
 
@@ -75,11 +75,13 @@ Enqueue both files from your theme or a mu-plugin (the init file declares the li
 // NOTE: When used in mu-plugins, add at the top: defined('ABSPATH') || exit;
 
 add_action('wp_enqueue_scripts', function () {
-    wp_enqueue_style('eric-slider-css', get_template_directory_uri() . '/assets/eric-slider-vX.XX.X.css', [], '');
-    wp_enqueue_script('eric-slider-js', get_template_directory_uri() . '/assets/eric-slider-vX.XX.X.js', [], '', true);
-    wp_enqueue_script('eric-slider-init', get_template_directory_uri() . '/assets/eric-slider-init-vX.XX.X.js', ['eric-slider-js'], '', true);
+    wp_enqueue_style('eric-slider-css', get_stylesheet_directory_uri() . '/assets/eric-slider-vX.XX.X.css', [], '');
+    wp_enqueue_script('eric-slider-js', get_stylesheet_directory_uri() . '/assets/eric-slider-vX.XX.X.js', [], '', true);
+    wp_enqueue_script('eric-slider-init', get_stylesheet_directory_uri() . '/assets/eric-slider-init-vX.XX.X.js', ['eric-slider-js'], '', true);
 }, 20);
 ```
+
+`get_stylesheet_directory_uri()` points at the active theme — the child theme if you use one. Swap it for `get_template_directory_uri()` only if the files live in the parent.
 
 Add a FOUC guard in `wp_head` to keep sliders hidden until JS initialises them:
 
@@ -112,13 +114,7 @@ Include both files directly in your HTML:
 <script src="eric-slider-vX.XX.X.js"></script>
 ```
 
-Place on server (do NOT include in HTML):
-
-**eric-slider-animate.php**
-```html
-https://yourdomain.com/eric-slider-animate.php
-```
-Then open it directly in browser to configure slider → The JS uses those settings automatically
+`eric-slider-animate.php` is WordPress-only and not needed for standalone use.
 
 ---
 
@@ -261,7 +257,7 @@ slider.destroy();       // Tear down the slider and restore original DOM
 
 ## Theming
 
-The CSS file contains only structural styles. Colour and visual overrides belong in your own stylesheet using these selectors:
+Structural styles come first in the CSS file; the example skin from ericroth.org follows and can be removed. Colour overrides belong in your own stylesheet:
 
 ```css
 /* Dot colours */
@@ -273,15 +269,19 @@ The CSS file contains only structural styles. Colour and visual overrides belong
 .eric-slider-ctrl-pause,
 .eric-slider-ctrl-next              { color: #333; }
 
-/* Focus ring (uses CSS variables with fallbacks) */
-/* Set --a11y-focus-color and --a11y-focus-width on :root to control globally */
+/* Focus ring — set these on :root, or the outline will not render */
+:root {
+    --a11y-focus-color:  #000;
+    --a11y-focus-width:  1px;
+    --a11y-focus-offset: 2px;
+}
 ```
 
 ---
 
 ## Browser Support
 
-All modern browsers. Requires ES5 + `Array.forEach` + `classList` — supported everywhere since IE11. `ResizeObserver` and `IntersectionObserver` are used where available and degrade gracefully.
+All modern browsers. `ResizeObserver` and `IntersectionObserver` are used where available and degrade gracefully.
 
 ---
 
