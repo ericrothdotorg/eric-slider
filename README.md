@@ -257,7 +257,7 @@ slider.destroy();       // Tear down the slider and restore original DOM
 
 ## Theming
 
-Structural styles come first in the CSS file; the example skin from ericroth.org follows and can be removed. Colour overrides belong in your own stylesheet:
+Structural styles come first in the CSS file; the example skin from [ericroth.org](https://ericroth.org) follows and can be removed. Colour overrides belong in your own stylesheet:
 
 ```css
 /* Dot colours */
