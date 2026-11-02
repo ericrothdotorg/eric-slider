@@ -293,17 +293,17 @@ MIT — free to use, modify, and distribute.
 
 ## Animate.css Integration (optional)
 
-The included PHP / JS example also integrates [Animate.css](https://animate.style) by Dan Eden for scroll-triggered entrance animations. It is entirely optional and independent of the slider itself.
+The included PHP / JS example also integrates [Animate.css ↗](https://animate.style) by Dan Eden for scroll-triggered entrance animations. It is entirely optional and independent of the slider itself.
 
 To use it, enqueue `animate.min.css` and `animate.js` alongside Eric Slider and add one of the trigger classes (e.g. `daneden-fadeInUp`) to any element. The script uses `IntersectionObserver` to fire the animation when the element scrolls into view.
 
-Animate.css is MIT licensed. See [animate.style](https://animate.style) for the full library and docs.
+Animate.css is MIT licensed. See [animate.style ↗](https://animate.style) for the full library and docs.
 
 ---
 
 ## Shortcode Integration (optional)
 
 The slider is initialised by CSS class, so it works with any method of outputting HTML-hardcoded markup, custom blocks, or shortcode plugins.
-The examples shown use class names designed to pair with [Display Posts Shortcode](https://displayposts.com/) by Bill Erickson, but that is entirely optional and independent of the slider itself.
+The examples shown use class names designed to pair with [Display Posts Shortcode ↗](https://displayposts.com/) by Bill Erickson, but that is entirely optional and independent of the slider itself.
 
-Display Posts is GPL-3.0 licensed. See [display-posts-shortcode](https://github.com/billerickson/display-posts-shortcode) for the full library and docs.
+Display Posts is GPL-3.0 licensed. See [display-posts-shortcode ↗](https://github.com/billerickson/display-posts-shortcode) for the full library and docs.
