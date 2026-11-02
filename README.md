@@ -306,4 +306,4 @@ Animate.css is MIT licensed. See [animate.style ↗](https://animate.style) for 
 The slider is initialised by CSS class, so it works with any method of outputting HTML-hardcoded markup, custom blocks, or shortcode plugins.
 The examples shown use class names designed to pair with [Display Posts Shortcode ↗](https://displayposts.com/) by Bill Erickson, but that is entirely optional and independent of the slider itself.
 
-Display Posts is GPL-3.0 licensed. See [display-posts-shortcode ↗](https://github.com/billerickson/display-posts-shortcode) for the full library and docs.
+Display Posts is GPL-3.0 licensed. See the [Github Repo ↗](https://github.com/billerickson/display-posts-shortcode) for the full library and docs.
