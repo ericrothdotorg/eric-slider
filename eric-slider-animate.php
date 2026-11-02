@@ -20,17 +20,17 @@ add_action('wp_enqueue_scripts', function () {
     $needs_animate = apply_filters( 'er_needs_animate_css', $needs_animate );
 
     if ( $needs_animate ) {
-        wp_enqueue_style('animate-css', get_stylesheet_directory_uri() . '/my-assets/animate.min.css', [], '4.1.1');
-        wp_enqueue_script('animate-js', get_stylesheet_directory_uri() . '/my-assets/animate.js', [], filemtime(get_stylesheet_directory() . '/my-assets/animate.js'), true);
+        wp_enqueue_style('animate-css', get_stylesheet_directory_uri() . '/assets/animate/animate.min.css', [], '4.1.1');
+        wp_enqueue_script('animate-js', get_stylesheet_directory_uri() . '/assets/animate/animate.js', [], filemtime(get_stylesheet_directory() . '/assets/animate/animate.js'), true);
     }
 
     // The eric-slider files load on every page. That's fine: the Eric Slider
     // CSS is small (~5KB) and the Eric Slider JS quietly does nothing when
     // there's no slider on the page.
 	
-    wp_enqueue_style('eric-slider-css', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-v1.00.0.css', [], '1.00.1');
-    wp_enqueue_script('eric-slider-js', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-v1.00.0.js', [], '1.00.1', true);
-    wp_enqueue_script('eric-slider-init', get_stylesheet_directory_uri() . '/my-assets/eric-slider/eric-slider-init-v1.00.0.js', ['eric-slider-js'], '1.00.1', true);
+    wp_enqueue_style('eric-slider-css', get_stylesheet_directory_uri() . '/assets/eric-slider/eric-slider-v1.00.0.css', [], '1.00.1');
+    wp_enqueue_script('eric-slider-js', get_stylesheet_directory_uri() . '/assets/eric-slider/eric-slider-v1.00.0.js', [], '1.00.1', true);
+    wp_enqueue_script('eric-slider-init', get_stylesheet_directory_uri() . '/assets/eric-slider/eric-slider-init-v1.00.0.js', ['eric-slider-js'], '1.00.1', true);
 }, 20);
 
 // Tell LiteSpeed Cache to leave slider images alone. The slider needs to
