@@ -297,7 +297,7 @@ The included PHP / JS example also integrates [Animate.css ↗](https://animate.
 
 To use it, enqueue `animate.min.css` and `animate.js` alongside Eric Slider and add one of the trigger classes (e.g. `daneden-fadeInUp`) to any element. The script uses `IntersectionObserver` to fire the animation when the element scrolls into view.
 
-Animate.css is MIT licensed. See [animate.style ↗](https://animate.style) for the full library and docs.
+Animate.css is MIT licensed. See their [Website ↗](https://animate.style) for the full library and docs.
 
 ---
 
