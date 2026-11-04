@@ -4,7 +4,7 @@
 
 A lightweight, zero-dependency vanilla JavaScript slider / carousel, the one used in [ericroth.org](https://ericroth.org/). No jQuery, no bloat - just clean, accessible HTML output with smallest footprint possible.
 
-**Tags:** slider, carousel, javascript, vanilla-js, wordpress, fade, autoplay, responsive, accessible, zero-dependency, eric-theme
+**Tags:** eric-slider, carousel, javascript, vanilla-js, wordpress, fade, autoplay, responsive, accessible, zero-dependency, eric-theme, eric-snippets, website-lab
 
 ---
 
