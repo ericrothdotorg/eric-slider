@@ -2,7 +2,7 @@
 
 **Contributors:** [ericrothdotorg](https://github.com/ericrothdotorg)
 
-A lightweight, zero-dependency vanilla JavaScript slider / carousel. No jQuery, no bloat - just clean, accessible HTML output with smallest footprint possible.
+A lightweight, zero-dependency vanilla JavaScript slider / carousel, the one used in [ericroth.org](https://ericroth.org/). No jQuery, no bloat - just clean, accessible HTML output with smallest footprint possible.
 
 **Tags:** slider, carousel, javascript, vanilla-js, wordpress, fade, autoplay, responsive, accessible, zero-dependency
 
