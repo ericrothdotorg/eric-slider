@@ -2,7 +2,7 @@
 
 **Contributors:** [ericrothdotorg](https://github.com/ericrothdotorg)
 
-A lightweight, zero-dependency vanilla JavaScript slider / carousel, the one used in [ericroth.org](https://ericroth.org/). No jQuery, no bloat - just clean, accessible HTML output with smallest footprint possible.
+A lightweight, zero-dependency vanilla JavaScript slider / carousel, the one used in [ericroth.org](https://ericroth.org/). No jQuery, no bloat – just clean, accessible HTML output with smallest footprint possible.
 
 **Tags:** eric-slider, slider, carousel, javascript, vanilla-js, wordpress, fade, autoplay, responsive, accessible, zero-dependency, eric-theme, eric-snippets, website-lab
 
@@ -10,7 +10,7 @@ A lightweight, zero-dependency vanilla JavaScript slider / carousel, the one use
 
 **What makes it genuinely stand out**
 
-The WordPress-native approach is quite uncommon. Most sliders are npm / bundler-first and treat WordPress as an afterthought. This one is built the other way around - the PHP enqueue pattern, LiteSpeed Cache filter, FOUC guard in wp_head, and the way colours and focus rings run through CSS variables so theme developers can override freely. That's a coherent, thought-through philosophy that most "just another slider" libraries don't have. Furthermore, it's genuinely zero-dependency in the truest sense - no build step, no npm, no bundler. You drop two files in and write a new EricSlider(). That's increasingly rare as most modern libraries assume a toolchain.
+The WordPress-native approach is quite uncommon. Most sliders are npm / bundler-first and treat WordPress as an afterthought. This one is built the other way around – the PHP enqueue pattern, LiteSpeed Cache filter, FOUC guard in wp_head, and the way colours and focus rings run through CSS variables so theme developers can override freely. That's a coherent, thought-through philosophy that most "just another slider" libraries don't have. Furthermore, it's genuinely zero-dependency in the truest sense – no build step, no npm, no bundler. You drop two files in and write a new EricSlider(). That's increasingly rare as most modern libraries assume a toolchain.
 
 **Who would actually reach for it**
 
@@ -33,21 +33,21 @@ See the Eric Slider in action at
 
 ## Features
 
-- **Zero dependencies** — pure vanilla JS, no jQuery or frameworks required
-- **Fade mode** — cross-fade between slides instead of sliding
-- **Vertical mode** — scroll slides top-to-bottom
-- **Center mode** — peek at adjacent slides with configurable padding
-- **Multiple slides** — show and scroll more than one slide at a time
-- **Responsive** — breakpoint-based settings via the `responsive` option
-- **Adaptive height** — list height animates to match the active slide
-- **Autoplay** — with pause on hover and pause on focus support
-- **Dots** — clickable navigation dots
-- **Controls** — prev / pause / next button bar
-- **Accessible** — ARIA roles, `aria-hidden`, keyboard navigation (arrow keys), and `prefers-reduced-motion` support
-- **Draggable** — mouse and touch drag support
-- **Infinite loop** — clone-based seamless looping
-- **FOUC guard** — slides stay hidden until initialised, preventing flash of unstyled content
-- **LiteSpeed Cache friendly** — easily exclude slider images from lazy-load optimisers
+- **Zero dependencies** – pure vanilla JS, no jQuery or frameworks required
+- **Fade mode** – cross-fade between slides instead of sliding
+- **Vertical mode** – scroll slides top-to-bottom
+- **Center mode** – peek at adjacent slides with configurable padding
+- **Multiple slides** – show and scroll more than one slide at a time
+- **Responsive** – breakpoint-based settings via the `responsive` option
+- **Adaptive height** – list height animates to match the active slide
+- **Autoplay** – with pause on hover and pause on focus support
+- **Dots** – clickable navigation dots
+- **Controls** – prev / pause / next button bar
+- **Accessible** – ARIA roles, `aria-hidden`, keyboard navigation (arrow keys), and `prefers-reduced-motion` support
+- **Draggable** – mouse and touch drag support
+- **Infinite loop** – clone-based seamless looping
+- **FOUC guard** – slides stay hidden until initialised, preventing flash of unstyled content
+- **LiteSpeed Cache friendly** – easily exclude slider images from lazy-load optimisers
 
 ---
 
@@ -55,13 +55,13 @@ See the Eric Slider in action at
 
 | File | Description |
 |---|---|
-| [eric-slider-animate.php](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-animate.php) | WordPress integration — enqueues, FOUC guard, LiteSpeed Cache filter |
+| [eric-slider-animate.php](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-animate.php) | WordPress integration – enqueues, FOUC guard, LiteSpeed Cache filter |
 | [eric-slider-init-v1.00.0.js](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-init-v1.00.0.js) | Slider init & config (loaded with eric-slider-js as a dependency) |
 | [eric-slider-v1.00.0.js](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v1.00.0.js) | Core slider logic |
 | [eric-slider-v1.00.0.css](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v1.00.0.css) | Structural styles, plus the example skin used on ericroth.org |
 | [animate.js](https://github.com/ericrothdotorg/eric-theme/blob/main/assets/animate/animate.js) | Optional if you want to integrate animation (see below) |
 
-Colours and focus rings run through CSS variables, so you can theme the slider from your own stylesheet without editing the file. The lower part of the CSS is the example skin from ericroth.org (`.slideshow-*` and `.layer-*` rules) — delete it if you don't want it.
+Colours and focus rings run through CSS variables, so you can theme the slider from your own stylesheet without editing the file. The lower part of the CSS is the example skin from ericroth.org (`.slideshow-*` and `.layer-*` rules) – delete it if you don't want it.
 
 ---
 
@@ -81,7 +81,7 @@ add_action('wp_enqueue_scripts', function () {
 }, 20);
 ```
 
-`get_stylesheet_directory_uri()` points at the active theme — the child theme if you use one. Swap it for `get_template_directory_uri()` only if the files live in the parent.
+`get_stylesheet_directory_uri()` points at the active theme – the child theme if you use one. Swap it for `get_template_directory_uri()` only if the files live in the parent.
 
 Add a FOUC guard in `wp_head` to keep sliders hidden until JS initialises them:
 
@@ -269,7 +269,7 @@ Structural styles come first in the CSS file; the example skin from [ericroth.or
 .eric-slider-ctrl-pause,
 .eric-slider-ctrl-next              { color: #333; }
 
-/* Focus ring — set these on :root, or the outline will not render */
+/* Focus ring – set these on :root, or the outline will not render */
 :root {
     --a11y-focus-color:  #000;
     --a11y-focus-width:  1px;
@@ -287,7 +287,7 @@ All modern browsers. `ResizeObserver` and `IntersectionObserver` are used where 
 
 ## License
 
-MIT — free to use, modify, and distribute.
+MIT – free to use, modify, and distribute.
 
 ---
 
