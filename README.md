@@ -59,7 +59,7 @@ See the Eric Slider in action at
 | [eric-slider-init-v1.00.0.js](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-init-v1.00.0.js) | Slider init & config (loaded with eric-slider-js as a dependency) |
 | [eric-slider-v1.00.0.js](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v1.00.0.js) | Core slider logic |
 | [eric-slider-v1.00.0.css](https://github.com/ericrothdotorg/eric-slider/blob/main/eric-slider-v1.00.0.css) | Structural styles, plus the example skin used on ericroth.org |
-| [animate.js](https://github.com/ericrothdotorg/website-lab/blob/main/eric-theme/assets/animate/animate.js) | Optional if you want to integrate animation (see below) |
+| [animate.js](https://github.com/ericrothdotorg/eric-theme/blob/main/assets/animate/animate.js) | Optional if you want to integrate animation (see below) |
 
 Colours and focus rings run through CSS variables, so you can theme the slider from your own stylesheet without editing the file. The lower part of the CSS is the example skin from ericroth.org (`.slideshow-*` and `.layer-*` rules) — delete it if you don't want it.
 
