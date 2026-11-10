@@ -272,6 +272,7 @@
             clone.classList.add('eric-slider-cloned');
             clone.setAttribute('aria-hidden', 'true');
             clone.removeAttribute('data-index');
+            clone.removeAttribute('id');
             this._track.insertBefore(clone, this._track.firstChild);
         }
 
@@ -281,6 +282,7 @@
             clone2.classList.add('eric-slider-cloned');
             clone2.setAttribute('aria-hidden', 'true');
             clone2.removeAttribute('data-index');
+            clone2.removeAttribute('id');
             this._track.appendChild(clone2);
         }
     };
