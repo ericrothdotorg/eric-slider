@@ -271,6 +271,7 @@
             var clone  = this._slideEls[srcIdx].cloneNode(true);
             clone.classList.add('eric-slider-cloned');
             clone.setAttribute('aria-hidden', 'true');
+            clone.setAttribute('inert', ''); // loop copy: never focusable or clickable
             clone.removeAttribute('data-index');
             clone.removeAttribute('id');
             this._track.insertBefore(clone, this._track.firstChild);
@@ -281,6 +282,7 @@
             var clone2 = this._slideEls[j % total].cloneNode(true);
             clone2.classList.add('eric-slider-cloned');
             clone2.setAttribute('aria-hidden', 'true');
+            clone2.setAttribute('inert', ''); // loop copy: never focusable or clickable
             clone2.removeAttribute('data-index');
             clone2.removeAttribute('id');
             this._track.appendChild(clone2);
@@ -652,11 +654,8 @@
                 visible = offset >= 0 && offset < opts.slidesToShow;
             }
             slide.setAttribute('aria-hidden', visible ? 'false' : 'true');
-            slide.style.pointerEvents = visible ? '' : 'none';
-            var focusable = slide.querySelectorAll('a, input, button, select, textarea, [tabindex]');
-            Array.prototype.forEach.call(focusable, function (f) {
-                visible ? f.removeAttribute('tabindex') : f.setAttribute('tabindex', '-1');
-            });
+            // inert: a hidden slide can be neither focused nor clicked, and its own tabindex values stay untouched
+            slide.toggleAttribute('inert', !visible);
         });
     };
 
