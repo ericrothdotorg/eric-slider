@@ -195,15 +195,16 @@
         if (opts.dots) {
             this._dotsEl = document.createElement('ul');
             this._dotsEl.className = 'eric-slider-dots';
-            this._dotsEl.setAttribute('role', 'tablist');
+            this._dotsEl.setAttribute('aria-label', 'Choose slide');
             for (var i = 0; i < this._count; i++) {
                 var li  = document.createElement('li');
                 var btn = document.createElement('button');
                 btn.type = 'button';
-                btn.setAttribute('role', 'tab');
+                // Plain buttons in a list; the active one is marked with aria-current.
+                // (No tablist / tab roles: those require arrow-key navigation and tab panels.)
                 btn.setAttribute('aria-label', 'Slide ' + (i + 1));
                 btn.setAttribute('aria-controls', self._uid + '-slide-' + i);
-                btn.setAttribute('aria-selected', i === self.current ? 'true' : 'false');
+                if (i === self.current) btn.setAttribute('aria-current', 'true');
                 btn.innerHTML = '<svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><circle cx="6" cy="6" r="6"/></svg>';
                 li.appendChild(btn);
                 this._dotsEl.appendChild(li);
@@ -627,7 +628,8 @@
         if (!this._dotsEl) return;
         Array.prototype.forEach.call(this._dotsEl.children, function (li, i) {
             li.classList.toggle('eric-slider-active', i === this.current);
-            li.querySelector('button').setAttribute('aria-selected', i === this.current ? 'true' : 'false');
+            var btn = li.querySelector('button');
+            if (i === this.current) btn.setAttribute('aria-current', 'true'); else btn.removeAttribute('aria-current');
         }, this);
     };
 
