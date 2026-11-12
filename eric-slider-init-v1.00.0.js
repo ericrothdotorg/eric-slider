@@ -20,8 +20,8 @@
  * SHARED turns it on. Same for anything else: `slidesToScroll: 2`, `speed: 800`,
  * `draggable: false`. See the commented example at the end of SLIDER_PROFILES.
  *
- * KEEP IN SYNC: the FOUC guard in PHP lists the same classes. Add a profile here,
- * add its class there.
+ * NAMING: every profile class must start with "slideshow-". The FOUC guard in PHP
+ * (Eric Slider & Animate) hides [class*="slideshow-"] until the slider is ready.
  * ─────────────────────────────────────────────────────────────────────────────
  */
 
