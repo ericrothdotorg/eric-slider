@@ -782,7 +782,6 @@
 
         function onStart(e) {
             if (self._animating) return;
-            if (e.touches) e.preventDefault();
             startX       = getX(e);
             startY       = getY(e);
             startOffset  = opts.vertical
