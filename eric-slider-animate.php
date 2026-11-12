@@ -52,17 +52,8 @@ add_filter('litespeed_optimize_html_excluded_selectors', function($excludes) {
 add_action('wp_head', function () {
 	?>
 	<style>
-		.slideshow-single-item, /* (slide, with controls, with dots) */
-		.slideshow-single-item-fade, /* (fade, no controls, with dots) */
-		.slideshow-single-item-no-dots, /* (fade, no controls, no dots) */
-		.slideshow-single-item-chromeless, /* (slide, no controls, no dots) */
-		.slideshow-multiple-items, /* (slide, with controls, with dots) */
-		.slideshow-multiple-items-3, /* (slide, with controls, with dots) */
-		.slideshow-multiple-items-4, /* (slide, with controls, with dots) */
-		.slideshow-multiple-items-vertical, /* (slide, no controls, no dots) */
-		.slideshow-multiple-items-center-mode, /* (slide, with controls, with dots) */
-		.slideshow-quotes /* (fade, no controls, with dots) */ {visibility: hidden;}
-		.eric-slider-initialized {visibility: visible;}
+		/* Every slider profile class starts with "slideshow-" (see eric-slider-init), so no list to keep in sync */
+		[class*="slideshow-"]:not(.eric-slider-initialized) {visibility: hidden;}
 	</style>
 	<?php
 }, 6);
